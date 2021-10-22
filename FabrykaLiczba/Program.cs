@@ -4,14 +4,14 @@ namespace FabrykaLiczb
 {
     class Program
     {
-        public delegate int Sprawdz(int liczba);
+        
 
 
         static void Main(string[] args)
         {
             NumberGenerator nGen;
-            Sprawdz += NumberManager.sprawdzCzyPodzielnePrzez2;
-            Sprawdz += NumberManager.sprawdzCzyPodzielnePrzez3;
+            //Sprawdz += NumberManager.sprawdzCzyPodzielnePrzez2;
+            //Sprawdz += NumberManager.sprawdzCzyPodzielnePrzez3;
             Console.WriteLine("Podaj liczbę: ");
             string sLiczba = Console.ReadLine();
             int liczba = int.Parse(sLiczba);
@@ -34,6 +34,14 @@ namespace FabrykaLiczb
 
     class NumberManager
     {
+        public delegate int Sprawdz(int liczba);
+
+        public NumberManager(NumberGenerator numberGenerator)
+        {
+            Sprawdz sprawdz = new Sprawdz(sprawdzCzyPodzielnePrzez2);
+            sprawdz += sprawdzCzyPodzielnePrzez3;
+        }
+
         public static int sprawdzCzyPodzielnePrzez2(int liczba)
         {
             if (liczba%2 == 0)
